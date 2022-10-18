@@ -1,4 +1,5 @@
-<!--"template.php"=servira de base/squelette à l'ensemble des vues.-->
+<!--"template.php"=servira de base/squelette à l'ensemble des vues.
+Déclaration du doctype, links css, js etc qu'une seule fois.-->
 <!DOCTYPE html>
 <html lang="en">
 <head>

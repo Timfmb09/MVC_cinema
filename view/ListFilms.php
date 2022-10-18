@@ -1,9 +1,11 @@
+<!-- "view" = l'ensemble des vues affichant les résultats de nos requêtes-->
+
 <?php ob_start(); ?>
 <!--démarre la temporisation de sortie. Tant qu'elle est enclenchée, aucune donnée, 
 hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en tampon.-->
 
 
-<p class="uk-label uk-label-warning">Il y a <?= $requete->rowCount()  ?> films </p>
+<p class="uk-label uk-label-warning">Il y a <?= $requete->rowCount()  ?> films</p>
 
 <table class="uk-label uk-label-striped">
     <thead>
@@ -17,7 +19,7 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
             foreach($requete->fetchAll() as $film) { ?>
                 <tr>
                     <td><?= $film["titre"] ?></td>
-                    <td><?=$film["annee_sortie"] ?></td>
+                    <td><?=$film["annee_sortie_france"] ?></td>
                 </tr>
             <?php } ?>
         </tbody>

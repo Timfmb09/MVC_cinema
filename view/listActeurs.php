@@ -1,6 +1,7 @@
+<!-- "view" = l'ensemble des vues affichant les résultats de nos requêtes-->
+
 <?php ob_start(); ?>
-<!-- "view" = l'ensemble des vues affichant les résultats 
-de nos requêtes mais aussi un fichier-->
+
 <p class="uk-label uk-label-warning">Il y a <?= $requete->rowCount()  ?> acteurs </p>
 
 <table class="uk-label uk-label-striped">
@@ -14,8 +15,8 @@ de nos requêtes mais aussi un fichier-->
         <?php
             foreach($requete->fetchAll() as $acteur) { ?>
                 <tr>
-                    <td><?= $acteur["nom_acteur"] ?></td>
-                    <td><?=$acteur["prenom_acteur"] ?></td>
+                    <td><?= $acteur["nom"] ?></td>
+                    <td><?=$acteur["prenom"] ?></td>
                 </tr>
             <?php } ?>
         </tbody>
