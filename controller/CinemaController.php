@@ -42,14 +42,51 @@ class CinemaController {
 
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-            SELECT nom, prenom
-            FROM personne            
+                SELECT nom, prenom
+                FROM personne 
+                INNER JOIN realisateur 
+                ON personne.id_personne=realisateur.id_personne        
         ");
 
         require "view/listRealisateurs.php";
         
     }
+    public function listGenres() {
 
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->query("
+                SELECT film.titre, GROUP_CONCAT(genre.nom_genre) as genre
+                FROM film
+                INNER JOIN associer_genre ON film.id_film=associer_genre.id_film
+                INNER JOIN genre ON associer_genre.id_genre=genre.id_genre
+                GROUP BY film.id_film
+        ");
+
+        require "view/listGenres.php";
+        
+    }
+
+    public function listRoles() {
+
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->query("
+                SELECT film.titre, role.nom_role
+                FROM film
+                INNER JOIN jouer ON film.id_film=jouer.id_film
+                INNER JOIN role ON jouer.id_role = role.id_role
+        ");
+
+        require "view/listRoles.php";
+        
+    }
+    public function detFilm($id) {
+
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("SELECT titre FROM film = :id");
+        $requete->execute(["id" =>$id]);      
+        require "view/film/detailFilm.php";
+        
+    }
 
 }
 

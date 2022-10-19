@@ -11,7 +11,17 @@ Déclaration du doctype, links css, js etc qu'une seule fois.-->
     <title><?= $titre ?></title>
 </head>
 <body>
-    <nav class="uk-navbar-container" uk-navbar uk-stripos  ></nav>
+
+
+    <nav class="uk-navbar-container" uk-navbar uk-stripos  >
+        <ul>
+            <li><a href="index.php?action=listFilms">Films</a></li>
+            <li><a href="index.php?action=listActeurs">Acteurs</a></li>
+            <li><a href="index.php?action=listRealisateurs">Realisateurs</a></li>
+            <li><a href="index.php?action=listGenres">Genres</a></li>
+            <li><a href="index.php?action=listRoles">Roles</a></li>
+        </ul>
+    </nav>
     <div id="wrapper" class="uk-container uk-container-expand" >
         <main>
             <div id="contenu">
