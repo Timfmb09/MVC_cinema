@@ -14,7 +14,7 @@ abstract class Connect {
     const HOST = "localhost";
     const DB = "cinema_v2";
     const USER = "root";
-    const PASS = "root";
+    const PASS = "";
 
     public static function seConnecter() {
         try {

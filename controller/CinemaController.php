@@ -43,8 +43,7 @@ class CinemaController {
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
             SELECT nom, prenom
-            FROM realisateur
-            INNER JOIN personne
+            FROM personne            
         ");
 
         require "view/listRealisateurs.php";
