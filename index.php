@@ -32,11 +32,11 @@ if(isset($_GET["action"])){
         case "listRealisateurs" : $ctrlCinema_v2->listRealisateurs(); break;
         case "listGenres" : $ctrlCinema_v2->listGenres(); break;
         case "listRoles" : $ctrlCinema_v2->listRoles(); break;
-        case "detailFilm" : $ctrlCinema_v2->detFilm($id); break;
-        case "detailActeurs" : $ctrlCinema_v2->detActeurs($id); break;
-        case "detailRealisateurs" : $ctrlCinema_v2->detailRealisateurs($id); break;
-        case "detailGenres" : $ctrlCinema_v2->detailGenres($id); break;
-        case "detailRoles" : $ctrlCinema_v2->detailRoles($id); break;
+        case "detailFilm" : $ctrlCinema_v2->detailFilm($id); break;
+        case "detailActeur" : $ctrlCinema_v2->detailActeur($id); break;
+        case "detailRealisateur" : $ctrlCinema_v2->detailRealisateur($id); break;
+        case "detailGenre" : $ctrlCinema_v2->detailGenre($id); break;
+        case "detailRole" : $ctrlCinema_v2->detailRole($id); break;
 
     }
 }

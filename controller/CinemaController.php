@@ -18,7 +18,7 @@ class CinemaController {
 
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-            SELECT titre, annee_sortie_france
+            SELECT titre, annee_sortie_france, id_film
             FROM film
         ");
 
@@ -29,9 +29,10 @@ class CinemaController {
 
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-            SELECT nom, prenom
-            FROM film
-            INNER JOIN personne
+                SELECT nom, prenom
+                FROM personne 
+                INNER JOIN acteur 
+                ON personne.id_personne=acteur.id_personne 
         ");
 
         require "view/listActeurs.php";
@@ -79,15 +80,81 @@ class CinemaController {
         require "view/listRoles.php";
         
     }
-    public function detFilm($id) {
-
+    public function detailFilm($id) {
         $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("SELECT titre FROM film = :id");
+        $requete = $pdo->prepare("
+                SELECT film.id_film, titre, DATE_FORMAT(annee_sortie_france, '%Y') AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
+                FROM film 
+                INNER JOIN realisateur 
+                ON realisateur.id_realisateur=film.id_realisateur 
+                INNER JOIN personne
+                ON personne.id_personne=realisateur.id_personne
+                WHERE film.id_film = :id
+        ");
         $requete->execute(["id" =>$id]);      
-        require "view/film/detailFilm.php";
+        require "view/detailFilm.php";
         
     }
-
+    public function detailActeur($id) {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+                SELECT film.id_film, titre, DATE_FORMAT(annee_sortie_france, '%Y') AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
+                FROM film 
+                INNER JOIN realisateur 
+                ON realisateur.id_realisateur=film.id_realisateur 
+                INNER JOIN personne
+                ON personne.id_personne=realisateur.id_personne
+                WHERE film.id_film=1 = :id
+        ");
+        $requete->execute(["id" =>$id]);      
+        require "view/detailFilm.php";
+        
+    }
+    public function detailRealisateur($id) {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+                SELECT film.id_film, titre, DATE_FORMAT(annee_sortie_france, '%Y') AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
+                FROM film 
+                INNER JOIN realisateur 
+                ON realisateur.id_realisateur=film.id_realisateur 
+                INNER JOIN personne
+                ON personne.id_personne=realisateur.id_personne
+                WHERE film.id_film=1 = :id
+        ");
+        $requete->execute(["id" =>$id]);      
+        require "view/detailFilm.php";
+        
+    }
+    public function detailGenre($id) {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+                SELECT film.id_film, titre, DATE_FORMAT(annee_sortie_france, '%Y') AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
+                FROM film 
+                INNER JOIN realisateur 
+                ON realisateur.id_realisateur=film.id_realisateur 
+                INNER JOIN personne
+                ON personne.id_personne=realisateur.id_personne
+                WHERE film.id_film=1 = :id
+        ");
+        $requete->execute(["id" =>$id]);      
+        require "view/detailFilm.php";
+        
+    }
+    public function detailRole($id) {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+                SELECT film.id_film, titre, DATE_FORMAT(annee_sortie_france, '%Y') AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
+                FROM film 
+                INNER JOIN realisateur 
+                ON realisateur.id_realisateur=film.id_realisateur 
+                INNER JOIN personne
+                ON personne.id_personne=realisateur.id_personne
+                WHERE film.id_film=1 = :id
+        ");
+        $requete->execute(["id" =>$id]);      
+        require "view/detailFilm.php";
+        
+    }
 }
 
 ?>

@@ -11,8 +11,8 @@ echo $film["note"]."\n";
 
 <?php
 
-$titre = "Détail du film".$film["titre"];
-$titre_secondaire = $film["titre"];
+$titre = "Steven Spielberg";
+$titre_secondaire = $film["acteur"];
 $contenu = ob_get_clean();
 require "view/template.php";
 

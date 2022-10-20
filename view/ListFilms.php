@@ -12,6 +12,7 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
         <tr>
             <th>TITRE</th>
             <th>ANNEE SORTIE</th>
+            <th>DETAIL DU FILM</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +21,8 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
                 <tr>
                     <td><?= $film["titre"] ?></td>
                     <td><?=$film["annee_sortie_france"] ?></td>
+                    <td> <a href="index.php?action=detailFilm&id=<?php echo $film["id_film"] ?>">+</a></td> 
+
                 </tr>
             <?php } ?>
         </tbody>
