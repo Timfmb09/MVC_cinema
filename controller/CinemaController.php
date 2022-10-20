@@ -91,20 +91,23 @@ class CinemaController {
                 ON personne.id_personne=realisateur.id_personne
                 WHERE film.id_film = :id
         ");
-        $requete->execute(["id" =>$id]);      
+        $requete->execute(["id" =>$id]);
+
+        $requete = $pdo->prepare("
+
+        ");
+        $requete->execute(["id" =>$id]);
+        
         require "view/detailFilm.php";
         
     }
     public function detailActeur($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-                SELECT film.id_film, titre, DATE_FORMAT(annee_sortie_france, '%Y') AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
-                FROM film 
-                INNER JOIN realisateur 
-                ON realisateur.id_realisateur=film.id_realisateur 
-                INNER JOIN personne
-                ON personne.id_personne=realisateur.id_personne
-                WHERE film.id_film=1 = :id
+                SELECT *
+                FROM acteur
+                WHERE id_acteur= :id
+                
         ");
         $requete->execute(["id" =>$id]);      
         require "view/detailFilm.php";
@@ -113,13 +116,7 @@ class CinemaController {
     public function detailRealisateur($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-                SELECT film.id_film, titre, DATE_FORMAT(annee_sortie_france, '%Y') AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
-                FROM film 
-                INNER JOIN realisateur 
-                ON realisateur.id_realisateur=film.id_realisateur 
-                INNER JOIN personne
-                ON personne.id_personne=realisateur.id_personne
-                WHERE film.id_film=1 = :id
+                SELECT 
         ");
         $requete->execute(["id" =>$id]);      
         require "view/detailFilm.php";
@@ -128,13 +125,7 @@ class CinemaController {
     public function detailGenre($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-                SELECT film.id_film, titre, DATE_FORMAT(annee_sortie_france, '%Y') AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
-                FROM film 
-                INNER JOIN realisateur 
-                ON realisateur.id_realisateur=film.id_realisateur 
-                INNER JOIN personne
-                ON personne.id_personne=realisateur.id_personne
-                WHERE film.id_film=1 = :id
+                SELECT 
         ");
         $requete->execute(["id" =>$id]);      
         require "view/detailFilm.php";
@@ -143,13 +134,7 @@ class CinemaController {
     public function detailRole($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-                SELECT film.id_film, titre, DATE_FORMAT(annee_sortie_france, '%Y') AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
-                FROM film 
-                INNER JOIN realisateur 
-                ON realisateur.id_realisateur=film.id_realisateur 
-                INNER JOIN personne
-                ON personne.id_personne=realisateur.id_personne
-                WHERE film.id_film=1 = :id
+                SELECT 
         ");
         $requete->execute(["id" =>$id]);      
         require "view/detailFilm.php";

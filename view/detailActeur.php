@@ -2,17 +2,16 @@
 
 <?php ob_start(); 
 
-$film = $requete->fetch();
-echo $film["realisateur"]."\n";
-echo $film["duree"]."\n";
-echo $film["annee"]."\n";
-echo $film["note"]."\n";
+$acteur = $requete->fetch();
+echo $acteur["acteur"]."\n";
+
+
 ?>
 
 <?php
 
-$titre = "Steven Spielberg";
-$titre_secondaire = $film["acteur"];
+$titre = "Détail de l'acteur".$acteur["nom"];
+$titre_secondaire = $acteur["nom"];
 $contenu = ob_get_clean();
 require "view/template.php";
 

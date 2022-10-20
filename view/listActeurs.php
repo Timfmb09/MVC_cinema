@@ -17,6 +17,7 @@
                 <tr>
                     <td><?= $acteur["nom"] ?></td>
                     <td><?=$acteur["prenom"] ?></td>
+                    <td> <a href="index.php?action=detailActeur&id=<?php echo $acteur["id_acteur"] ?>">+</a></td> 
                 </tr>
             <?php } ?>
         </tbody>
