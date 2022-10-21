@@ -2,9 +2,9 @@
 
 <?php ob_start(); ?>
 
-<p class="uk-label uk-label-warning">Il y a <?= $requete->rowCount()  ?> acteurs </p>
+<p>Il y a <?= $requete->rowCount()  ?> acteurs </p>
 
-<table class="uk-label uk-label-striped">
+<table>
     <thead>
         <tr>
             <th>NOM</th>

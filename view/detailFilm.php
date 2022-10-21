@@ -2,11 +2,18 @@
 
 <?php ob_start(); 
 
-$film = $requete->fetch();
-echo $film["realisateur"]."\n";
-echo $film["duree"]."\n";
-echo $film["annee"]."\n";
-echo $film["note"]."\n";
+$film = $requetefilm->fetch();
+echo $film["realisateur"]."<br>";
+echo $film["duree"]."<br>";
+echo $film["annee"]."<br>";
+echo $film["note"]."<br>";
+
+$castings = $requetecasting->fetchAll();
+
+foreach ($castings AS $casting) {
+    echo $casting["acteur"]."<br>"."<br>";
+    echo $casting["role"]."<br>"."<br>";
+}
 ?>
 
 <?php

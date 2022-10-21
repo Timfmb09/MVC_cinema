@@ -29,7 +29,7 @@ class CinemaController {
 
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-                SELECT nom, prenom
+                SELECT nom, prenom, id_acteur
                 FROM personne 
                 INNER JOIN acteur 
                 ON personne.id_personne=acteur.id_personne 
@@ -82,8 +82,8 @@ class CinemaController {
     }
     public function detailFilm($id) {
         $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("
-                SELECT film.id_film, titre, DATE_FORMAT(annee_sortie_france, '%Y') AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
+        $requetefilm = $pdo->prepare("
+                SELECT film.id_film, titre, annee_sortie_france AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
                 FROM film 
                 INNER JOIN realisateur 
                 ON realisateur.id_realisateur=film.id_realisateur 
@@ -91,26 +91,52 @@ class CinemaController {
                 ON personne.id_personne=realisateur.id_personne
                 WHERE film.id_film = :id
         ");
-        $requete->execute(["id" =>$id]);
+        $requetefilm->execute(["id" =>$id]);
 
-        $requete = $pdo->prepare("
-
+        $requetecasting = $pdo->prepare("
+                SELECT CONCAT(prenom, ' ', nom) AS acteur, nom_role AS role
+                FROM jouer  
+                INNER JOIN acteur
+                ON jouer.id_acteur=acteur.id_acteur
+                INNER JOIN personne
+                ON personne.id_personne = acteur.id_personne
+                INNER JOIN film 
+                ON film.id_film=jouer.id_film
+                INNER JOIN role
+                ON role.id_role=jouer.id_role
+                WHERE film.id_film = :id
         ");
-        $requete->execute(["id" =>$id]);
+        $requetecasting->execute(["id" =>$id]);
         
         require "view/detailFilm.php";
         
     }
     public function detailActeur($id) {
         $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("
-                SELECT *
-                FROM acteur
-                WHERE id_acteur= :id
-                
+        $requeteacteur = $pdo->prepare("
+                SELECT DISTINCT CONCAT(prenom, ' ', nom) AS acteur, sexe, CONCAT(date_naissance) AS DATE
+                FROM jouer j
+                INNER JOIN acteur a ON a.id_acteur = j.id_acteur
+                INNER JOIN film f ON f.id_film = j.id_film
+                INNER JOIN acteur ON a.id_acteur = j.id_acteur
+                INNER JOIN personne p ON p.id_personne = a.id_personne
+                WHERE id_acteur= :id                
         ");
-        $requete->execute(["id" =>$id]);      
-        require "view/detailFilm.php";
+        $requeteacteur->execute(["id" =>$id]);      
+  
+        $requetefilmographie = $pdo->prepare("
+                SELECT DISTINCT film.id_film, titre, annee_sortie_france AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
+                FROM jouer
+                INNER JOIN film
+                ON film.id_film=jouer.id_film
+                INNER JOIN realisateur 
+                ON realisateur.id_realisateur=film.id_realisateur 
+                INNER JOIN personne
+                ON personne.id_personne=realisateur.id_personne
+                WHERE id_acteur= :id                
+        ");
+        $requetefilmographie ->execute(["id" =>$id]);      
+        require "view/detailActeur.php";
         
     }
     public function detailRealisateur($id) {
@@ -119,7 +145,7 @@ class CinemaController {
                 SELECT 
         ");
         $requete->execute(["id" =>$id]);      
-        require "view/detailFilm.php";
+        require "view/detailActeur.php";
         
     }
     public function detailGenre($id) {
@@ -141,5 +167,14 @@ class CinemaController {
         
     }
 }
+// SELECT titre, CONCAT(prenom, ' ', nom) AS acteur
+// FROM jouer j
+// INNER JOIN acteur a ON a.id_acteur = j.id_acteur
+// INNER JOIN film f ON f.id_film = j.id_film
+// INNER JOIN acteur ON a.id_acteur = j.id_acteur
+// INNER JOIN personne p ON p.id_personne = a.id_personne
+
+
 
 ?>
+

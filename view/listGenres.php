@@ -5,9 +5,9 @@
 hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en tampon.-->
 
 
-<p class="uk-label uk-label-warning">Il y a <?= $requete->rowCount()  ?> genres</p>
+<p>Il y a <?= $requete->rowCount()  ?> genres</p>
 
-<table class="uk-label uk-label-striped">
+<table>
     <thead>
         <tr>
             <th>TITRE</th>
