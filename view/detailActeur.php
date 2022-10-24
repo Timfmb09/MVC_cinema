@@ -10,7 +10,6 @@ echo $acteur["date"]."<br>";
 $filmographies = $requetefilmographie->fetchAll();
 
 foreach ($filmographies AS $filmographie) {
-    echo $filmographie["id_film"]."<br>";
     echo $filmographie["titre"]."<br>";
     echo $filmographie["annee"]."<br>";
     echo $filmographie["duree"]."<br>";
@@ -22,8 +21,8 @@ foreach ($filmographies AS $filmographie) {
 
 <?php
 
-$titre = "Détail de l'acteur".$acteur["titre"];
-$titre_secondaire = $acteur["titre"];
+$titre = "Détail de l'acteur".$acteur["acteur"];
+$titre_secondaire = $acteur["acteur"];
 $contenu = ob_get_clean();
 require "view/template.php";
 

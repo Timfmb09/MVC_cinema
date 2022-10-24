@@ -21,6 +21,7 @@ spl_autoload_register(function ($class_name) {
 });
 
 $ctrlCinema_v2 = new CinemaController();
+// $ctrlCinema_V2=nouvelle objet de la class cinema controler
 
 $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 

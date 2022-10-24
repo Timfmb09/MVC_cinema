@@ -1,13 +1,9 @@
 <?php
-// "Connect.php" = permettant de se connecter à la BDD grâce à PDO (PHP Data Objects).
-// On se contente de déclarer la connexion à la base de données
+// CONNECT permet de se connecter à la BDD grâce à PDO (PHP Data Objects).
+// ICI on déclare la connexion à la BDD.
 
-namespace Model;
+namespace Model;// namespace, permet de dire "je travaille dans ce dossier".
 // "Model"= va chercher les données auprès de la BDD.
-/**un namespace permettant de catégoriser virtuellement 
- * dans un espace de nom la classe en question. 
- * Ainsi on pourra "use" la classe sans connaître son emplacement physique. 
- * On a juste besoin de savoir dans quel namespace elle se trouve */
 
 abstract class Connect {
 
@@ -16,11 +12,11 @@ abstract class Connect {
     const USER = "root";
     const PASS = "root";
 
-    public static function seConnecter() {
+    public static function seConnecter() {//Indique le chemin de connection
         try {
             return new \PDO(
                 "mysql:host=".self::HOST.";dbname=".self::DB.";charset=utf8", self::USER, self::PASS);
-        } catch(\PDOException $ex) {
+        } catch(\PDOException $ex) { //renvoi au message d'erreur si il n'arrive pas a se connecter.
             return $ex->getMessage();
         }
 

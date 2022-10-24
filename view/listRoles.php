@@ -10,7 +10,6 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
 <table>
     <thead>
         <tr>
-            <th>TITRE</th>
             <th>ROLE</th>
         </tr>
     </thead>
@@ -18,8 +17,8 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
         <?php
             foreach($requete->fetchAll() as $role) { ?>
                 <tr>
-                    <td><?= $role["titre"] ?></td>
                     <td><?=$role["nom_role"] ?></td>
+                    <td> <a href="index.php?action=detailRole&id=<?php echo $role["id_role"] ?>">+</a></td> 
                 </tr>
             <?php } ?>
         </tbody>

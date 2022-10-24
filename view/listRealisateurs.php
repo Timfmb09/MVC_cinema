@@ -20,6 +20,7 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
                 <tr>
                     <td><?= $realisateur["nom"] ?></td>
                     <td><?=$realisateur["prenom"] ?></td>
+                    <td> <a href="index.php?action=detailRealisateur&id=<?php echo $realisateur["id_realisateur"] ?>">+</a></td> 
                 </tr>
             <?php } ?>
         </tbody>

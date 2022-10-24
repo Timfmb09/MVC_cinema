@@ -10,7 +10,6 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
 <table>
     <thead>
         <tr>
-            <th>TITRE</th>
             <th>GENRE</th>
         </tr>
     </thead>
@@ -18,8 +17,8 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
         <?php
             foreach($requete->fetchAll() as $genre) { ?>
                 <tr>
-                    <td><?= $genre["titre"] ?></td>
-                    <td><?=$genre["genre"] ?></td>
+                    <td><?=$genre["nom_genre"] ?></td>
+                    <td> <a href="index.php?action=detailGenre&id=<?php echo $genre["id_genre"] ?>">+</a></td> 
                 </tr>
             <?php } ?>
         </tbody>
