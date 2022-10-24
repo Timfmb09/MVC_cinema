@@ -18,6 +18,7 @@ class CinemaController {
             FROM film
             ORDER BY titre ASC  
         ");
+        
 // REQUIRE indique le chemin pour visualiser la requête
         require "view/listFilms.php";
     }

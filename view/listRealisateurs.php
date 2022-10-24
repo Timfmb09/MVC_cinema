@@ -12,6 +12,7 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
         <tr>
             <th>NOM</th>
             <th>PRENOM</th>
+            <th>DETAIL DU REALISATEUR</th>
         </tr>
     </thead>
     <tbody>

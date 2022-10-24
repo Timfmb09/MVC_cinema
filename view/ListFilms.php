@@ -20,7 +20,6 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
                     <td><?= $film["titre"] ?></td>
                     <td><?=$film["annee_sortie_france"] ?></td>
                     <td> <a href="index.php?action=detailFilm&id=<?php echo $film["id_film"] ?>">+</a></td> 
-
                 </tr>
             <?php } ?>
         </tbody>

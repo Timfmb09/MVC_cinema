@@ -18,7 +18,8 @@ Déclaration du doctype, links css, js etc qu'une seule fois.-->
             <li><a href="index.php?action=listActeurs">Acteurs</a></li>
             <li><a href="index.php?action=listRealisateurs">Realisateurs</a></li>
             <li><a href="index.php?action=listGenres">Genres</a></li>
-            <li><a href="index.php?action=listRoles">Roles</a></li>            
+            <li><a href="index.php?action=listRoles">Roles</a></li>
+                        
         </ul>
     </nav>
     <div id="wrapper" class="uk-container uk-container-expand" >

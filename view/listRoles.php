@@ -11,6 +11,7 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
     <thead>
         <tr>
             <th>ROLE</th>
+            <th>DETAIL DU ROLE</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,26 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
             <?php } ?>
         </tbody>
 </table>
+
+<html>
+  <head>
+    <title>insertion de données en PHP :: partie 1</title>
+  </head>
+<body>
+<form name="insertion" action="insertion2.php" method="POST">
+  <table border="0" align="left" cellspacing="2" cellpadding="2">
+    <tr align="left">
+      <td>Ajouter un nouveau rôle</td>
+      <td><input type="text" name="role"></td>
+    </tr>
+     
+    <tr align="left">
+      <td colspan="2"><input type="submit" value="Insérer"></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
 
 <?php
 

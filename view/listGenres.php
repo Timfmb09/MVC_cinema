@@ -11,6 +11,7 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
     <thead>
         <tr>
             <th>GENRE</th>
+            <th>DETAIL DU GENRE</th>
         </tr>
     </thead>
     <tbody>

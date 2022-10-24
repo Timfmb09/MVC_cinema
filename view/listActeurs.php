@@ -9,6 +9,7 @@
         <tr>
             <th>NOM</th>
             <th>PRENOM</th>
+            <th>DETAIL DE L'ACTEUR</th>
         </tr>
     </thead>
     <tbody>
