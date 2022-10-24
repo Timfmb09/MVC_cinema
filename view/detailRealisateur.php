@@ -3,17 +3,15 @@
 <?php ob_start(); //démarre la temporisation de sortie
 
 $realisateur = $requeterealisateur->fetch();
+echo " <h3>Le réalisateur</h3>".$realisateur["prenom"];
 echo $realisateur["nom"]."<br>";
-echo $realisateur["prenom"]."<br>";
 
 $filmographies = $requetefilmographie->fetchAll();
 
 foreach ($filmographies AS $filmographie) {
-    echo $filmographie["titre"]."<br>";
-    echo $filmographie["annee"]."<br>";
-    echo $filmographie["duree"]."<br>";
-    echo $filmographie["realisateur"]."<br>";
-    echo $filmographie["note"]."<br>";
+    echo " <h3>A joué dans le film</h3>".$filmographie["titre"]."<br>";
+    echo " <h3>En</h3>".$filmographie["annee"]."<br>";
+
 
 }
 ?>

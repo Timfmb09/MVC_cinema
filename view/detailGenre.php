@@ -3,13 +3,13 @@
 <?php ob_start(); //démarre la temporisation de sortie
 
 $genre = $requetegenre->fetch();
-echo $genre["nom_genre"]."<br>";
+
 
 
 $filmgenres = $requetefilmgenre->fetchAll();
-
+echo " <h3>Dans les films</h3>";
 foreach ($filmgenres AS $filmgenre) {
-    echo $filmgenre["titre"]."<br>";
+    echo " ".$filmgenre["titre"]."<br>";
 }
 ?>
 

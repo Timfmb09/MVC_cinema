@@ -3,18 +3,14 @@
 <?php ob_start(); 
 
 $acteur = $requeteacteur->fetch();
-echo $acteur["acteur"]."<br>";
-echo $acteur["sexe"]."<br>";
-echo $acteur["date"]."<br>";
+echo " <h3>L'acteur</h3>".$acteur["acteur"];
+echo " <h3>Né le</h3>".$acteur["date"];
 
 $filmographies = $requetefilmographie->fetchAll();
-
+echo " <h3>A joué dans les films suivants :</h3>";
 foreach ($filmographies AS $filmographie) {
     echo $filmographie["titre"]."<br>";
-    echo $filmographie["annee"]."<br>";
-    echo $filmographie["duree"]."<br>";
-    echo $filmographie["realisateur"]."<br>";
-    echo $filmographie["note"]."<br>";
+    
 
 }
 ?>

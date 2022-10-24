@@ -141,6 +141,8 @@ class CinemaController {
                 FROM personne 
                 INNER JOIN realisateur 
                 ON personne.id_personne=realisateur.id_personne
+                WHERE id_realisateur=:id   
+
         ");
         $requeterealisateur->execute(["id" =>$id]);   
         
@@ -163,6 +165,8 @@ class CinemaController {
         $requetegenre = $pdo->prepare("
                 SELECT nom_genre, id_genre
                 FROM genre
+                WHERE id_genre = :id
+                
         ");
         $requetegenre->execute(["id" =>$id]);  
 
@@ -172,6 +176,8 @@ class CinemaController {
                 INNER JOIN associer_genre ON film.id_film=associer_genre.id_film
                 INNER JOIN genre ON associer_genre.id_genre=genre.id_genre
                 GROUP BY film.id_film
+            
+              
          ");        
         $requetefilmgenre->execute(["id" =>$id]); 
         require "view/detailGenre.php";
@@ -180,22 +186,25 @@ class CinemaController {
     public function detailRole($id) {
         $pdo = Connect::seConnecter();
         $requeterole = $pdo->prepare("
-                SELECT id_role, role.nom_role
+                SELECT id_role, role.nom_role, descrip_role
                 FROM role
+                WHERE role.id_role=:id
                 ORDER BY nom_role ASC  
-
+                
         ");
         $requeterole->execute(["id" =>$id]);   
         
         
         $requetefilmrole = $pdo->prepare("
-                SELECT DISTINCT film.titre, role.id_role, role.nom_role
+                SELECT film.titre, role.id_role, role.nom_role, CONCAT (nom, ' ' ,prenom ) AS acteur
                 FROM film
                 INNER JOIN jouer ON film.id_film=jouer.id_film
                 INNER JOIN role ON jouer.id_role = role.id_role
+                INNER JOIN acteur ON acteur.id_acteur=jouer.id_acteur
+                INNER JOIN personne ON acteur.id_personne=personne.id_personne
                 WHERE role.id_role=:id
-                ORDER BY nom_role ASC  
-
+                ORDER BY nom_role ASC 
+                          
         ");
         $requetefilmrole->execute(["id" =>$id]);  
         require "view/detailRole.php";
