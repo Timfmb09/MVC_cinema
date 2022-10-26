@@ -19,13 +19,14 @@ Déclaration du doctype, links css, js etc qu'une seule fois.-->
             <li><a href="index.php?action=listRealisateurs">Realisateurs</a></li>
             <li><a href="index.php?action=listGenres">Genres</a></li>
             <li><a href="index.php?action=listRoles">Roles</a></li>
+            <li><a href="index.php?action=Add">Add</a></li>
                         
         </ul>
     </nav>
     <div id="wrapper" class="uk-container uk-container-expand" >
         <main>
             <div id="contenu">
-                <h1 class="uk-heading-devider">PDO Cinema</h1>
+                <h1 class="uk-heading-devider">Cinema</h1>
                 <h2 class="uk-heading-bullet"><?= $titre_secondaire ?></h2>
                 <?= $contenu ?>
             </div>

@@ -2,7 +2,11 @@
 
 <?php ob_start(); 
 
+?>
 
+<img href="<?php $film['affiche']?>" alt="affiche">
+
+<?php 
 
 $film = $requetefilm->fetch();
 echo "<h3>Réalisé par</h3>".$film["realisateur"];
@@ -12,17 +16,12 @@ echo "<h3>Note </h3>".$film["note"];
 
 $castings = $requetecasting->fetchAll();
 
+echo "<h2>Casting </h2>";
 foreach ($castings AS $casting) {
-    echo "<h3>L'acteur </h3>".$casting["acteur"]."<h3>A joué dans le rôle de  </h3>".$casting["role"];
+    echo "- ".$casting["acteur"]."(".$casting["role"].")<br>";
 }
 ?>
-<?php
 
-function mon_image(){
-  return '<img src="aff2.jpg" alt="mon image" />';
-}
-
-?>
 <?php
 
 $titre = "Détail du film".$film["titre"];
