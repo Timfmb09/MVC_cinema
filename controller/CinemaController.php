@@ -95,14 +95,10 @@ class CinemaController {
         $requetecasting = $pdo->prepare("
                 SELECT CONCAT(prenom, ' ', nom) AS acteur, nom_role AS role
                 FROM jouer  
-                INNER JOIN acteur
-                ON jouer.id_acteur=acteur.id_acteur
-                INNER JOIN personne
-                ON personne.id_personne = acteur.id_personne
-                INNER JOIN film 
-                ON film.id_film=jouer.id_film
-                INNER JOIN role
-                ON role.id_role=jouer.id_role
+                INNER JOIN acteur ON jouer.id_acteur=acteur.id_acteur
+                INNER JOIN personne ON personne.id_personne = acteur.id_personne
+                INNER JOIN film ON film.id_film=jouer.id_film
+                INNER JOIN role ON role.id_role=jouer.id_role
                 WHERE film.id_film = :id
         ");
         $requetecasting->execute(["id" =>$id]);

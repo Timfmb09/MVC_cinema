@@ -6,7 +6,7 @@ hormis les en-têtes, n'est envoyée au navigateur, mais temporairement mise en 
 <p>Il y a <?= $requete->rowCount()  ?> films</p>
 
 <table>
-    <thead>
+    <thead>  
         <tr>
             <th>TITRE</th>
             <th>ANNEE SORTIE</th>
