@@ -11,7 +11,6 @@ echo " <h3>A joué dans les films suivants :</h3>";
 foreach ($filmographies AS $filmographie) {
     echo $filmographie["titre"]."<br>";
     
-
 }
 ?>
 

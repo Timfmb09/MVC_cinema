@@ -82,7 +82,7 @@ class CinemaController {
     public function detailFilm($id) {
         $pdo = Connect::seConnecter();
         $requetefilm = $pdo->prepare("
-                SELECT film.id_film, titre, annee_sortie_france AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note
+                SELECT film.id_film, titre, annee_sortie_france AS annee, TIMEDIFF(duree_minutes, 'HH:MM') AS duree, CONCAT(prenom,' ',nom) AS realisateur, note, affiche
                 FROM film 
                 INNER JOIN realisateur 
                 ON realisateur.id_realisateur=film.id_realisateur 
@@ -207,6 +207,19 @@ class CinemaController {
         require "view/detailRole.php";
         
     }
+
+    public function addRole(){
+        
+
+
+
+    }
+
+
+
+
+
+
 }
 
 ?>
