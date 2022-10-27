@@ -305,6 +305,14 @@ class CinemaController {
     }
 
         public function addFilm(){
+
+                $pdo = Connect :: seConnecter();
+                $requeteReal = $pdo->query("
+                        SELECT id_realisateur, CONCAT(prenom, ' ', nom) AS realisateur
+                        FROM personne p
+                        INNER JOIN realisateur r ON p.id_personne = r.id_personne
+                ");
+                // $reqGenres = 
                 
         //si on détecte le submit ($_POST["submit])     
         //alors on se connecte à  la base de données
@@ -333,7 +341,6 @@ class CinemaController {
                                 "note"=> $noteFilm,
                                 "affiche"=> $afficheFilm,
                                 "id_realisateur"=>$id_realisateurFilm
-
                         ]);  
 
                         $lastInsertFilm=$pdo->lastInsertId();
