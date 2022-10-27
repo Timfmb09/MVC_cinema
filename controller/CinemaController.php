@@ -209,17 +209,198 @@ class CinemaController {
     }
 
     public function addRole(){
+        //si on détecte le submit ($_POST["submit])
+        //alors on se connecte à  la base de données
+        if(isset($_POST["submit"])) {
+                //on filtre le champ role du formulaire (filter_input)
+                $nomRole = filter_input(INPUT_POST, "nom_role", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $descRole = filter_input(INPUT_POST, "descrip_role", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                //si le filtre est valide, on prépare la requête d'insertion (INSERT INTO ... VALUES)
+                //on exécute la requête en faisant passer le tableau d'arguments
+                if($nomRole && $descRole) {
+                        $pdo = Connect :: seConnecter();
+                        $requeteRole = $pdo->prepare("
+                                INSERT INTO role (nom_role, descrip_role)
+                                VALUES (:nom_role, :desc_role) 
+                        ");
+                        $requeteRole->execute([
+                                "nom_role" => $nomRole,
+                                "desc_role" => $descRole
+                        ]);  
+                        //on fait la redirection vers la liste des rôles (header("Location: index.php..."))
+                        header("Location: index.php?action=listRoles");
+                        die;
+                }
+        }
         
+        require "view/addRole.php";
+    }
 
+        public function addGenre(){
+                //si on détecte le submit ($_POST["submit])
+                //alors on se connecte à  la base de données
+                if(isset($_POST["submit"])) {
+                        //on filtre le champ Genre du formulaire (filter_input)
+                        $nomgenre = filter_input(INPUT_POST, "nom_genre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                        //si le filtre est valide, on prépare la requête d'insertion (INSERT INTO ... VALUES)
+                        //on exécute la requête en faisant passer le tableau d'arguments
+                        if($nomgenre) {
+                                $pdo = Connect :: seConnecter();
+                                $requeteGenre = $pdo->prepare("
+                                        INSERT INTO genre (nom_genre)
+                                        VALUES (:nom_genre) 
+                                ");
+                                $requeteGenre->execute([
+                                        "nom_genre" => $nomgenre,                                        
+                                ]);  
+                                //on fait la redirection vers la liste des rôles (header("Location: index.php..."))
+                                header("Location: index.php?action=listGenres");
+                                die;
+                        }
+                }
+                
+                require "view/addGenre.php";
+        }
+        
+        public function addActeur(){
+        //si on détecte le submit ($_POST["submit])
+        //alors on se connecte à  la base de données
+        if(isset($_POST["submit"])) {
+                //on filtre le champ role du formulaire (filter_input)
+                $nomActeur = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $prenomActeur = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $sexeActeur = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $date_naissanceActeur = filter_input(INPUT_POST, "date_naissance", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                //si le filtre est valide, on prépare la requête d'insertion (INSERT INTO ... VALUES)
+                //on exécute la requête en faisant passer le tableau d'arguments
+                if($nomActeur && $prenomActeur && $sexeActeur && $date_naissanceActeur) {
+                        $pdo = Connect :: seConnecter();
+                        $requetePersonne = $pdo->prepare("
+                                INSERT INTO personne (nom, prenom, sexe, date_naissance)
+                                VALUES (:nom, :prenom, :sexe, :date_naissance) 
+                        ");
+                        $requetePersonne->execute([
+                                "nom" => $nomActeur,
+                                "prenom" => $prenomActeur,
+                                "sexe" => $sexeActeur,
+                                "date_naissance"=> $date_naissanceActeur
+                        ]);
+                        
+                        $lastInsertActeur=$pdo->lastInsertId();
+                        
+                        $requeteActeur=$pdo->prepare("
+                                INSERT INTO acteur ( id_personne)
+                                VALUES ( :id_personne)
+                                ");
+                        $requeteActeur->execute([
+                                "id_personne" => $lastInsertActeur
+                        ]);
+                        //on fait la redirection vers la liste des rôles (header("Location: index.php..."))
+                        header("Location: index.php?action=listActeurs");
+                        die;
+                }
+        }
+        
+        require "view/addActeur.php";
+    }
 
+        public function addFilm(){
+                
+        //si on détecte le submit ($_POST["submit])     
+        //alors on se connecte à  la base de données
+        if(isset($_POST["submit"])) {
+                //on filtre le champ role du formulaire (filter_input)
+                $titreFilm = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $annee_sortie_franceFilm = filter_input(INPUT_POST, "annee_sortie_france", FILTER_SANITIZE_NUMBER_INT);
+                $duree_minutesFilm = filter_input(INPUT_POST, "duree_minutes", FILTER_SANITIZE_NUMBER_INT);
+                $synopsisFilm = filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $noteFilm = filter_input(INPUT_POST, "note", FILTER_SANITIZE_NUMBER_INT);
+                $afficheFilm = filter_input(INPUT_POST, "affiche", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $id_realisateurFilm = filter_input(INPUT_POST, "id_realisateur", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                //si le filtre est valide, on prépare la requête d'insertion (INSERT INTO ... VALUES)
+                //on exécute la requête en faisant passer le tableau d'arguments
+                if($titreFilm && $annee_sortie_franceFilm && $duree_minutesFilm && $synopsisFilm && $noteFilm && $afficheFilm && $id_realisateurFilm) {
+                        $pdo = Connect :: seConnecter();
+                        $requeteFilm = $pdo->prepare("
+                                INSERT INTO film (titre, annee_sortie_france, duree_minutes, synopsis, note, affiche, id_realisateur)
+                                VALUES (:titre, :annee_sortie_france, :duree_minutes, :synopsis, :note, :affiche, :id_realisateur) 
+                        ");
+                        $requeteFilm->execute([
+                                "titre" => $titreFilm,
+                                "annee_sortie_france" => $annee_sortie_franceFilm,
+                                "duree_minutes" => $duree_minutesFilm,
+                                "synopsis"=> $synopsisFilm,
+                                "note"=> $noteFilm,
+                                "affiche"=> $afficheFilm,
+                                "id_realisateur"=>$id_realisateurFilm
 
+                        ]);  
+
+                        $lastInsertFilm=$pdo->lastInsertId();
+                        
+                        $requeteFilm=$pdo->prepare("
+                                INSERT INTO film ( id_film, id_realisateur)
+                                VALUES (:id_film, :id_realisateur)
+                                ");
+                        $requeteFilm->execute([
+                                "id_film" => $lastInsertFilm,
+                                "id_realisateur"=> $lastInsertFilm,
+                        ]);
+                        
+                        //on fait la redirection vers la liste des rôles (header("Location: index.php..."))
+                        header("Location: index.php?action=listFilms");
+                        die;
+                }
+        }
+        
+        require "view/addFilm.php";
     }
 
 
-
-
-
-
+    public function addRealisateur(){
+        //si on détecte le submit ($_POST["submit])
+        //alors on se connecte à  la base de données
+        if(isset($_POST["submit"])) {
+                //on filtre le champ role du formulaire (filter_input)
+                $nomRealisateur = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $prenomRealisateur = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $sexeRealisateur = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $date_naissanceRealisateur = filter_input(INPUT_POST, "date_naissance", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                //si le filtre est valide, on prépare la requête d'insertion (INSERT INTO ... VALUES)
+                //on exécute la requête en faisant passer le tableau d'arguments
+                if($nomRealisateur && $prenomRealisateur && $sexeRealisateur && $date_naissanceRealisateur ) {
+                        $pdo = Connect :: seConnecter();
+                        $requetePersonne = $pdo->prepare("
+                                INSERT INTO personne (nom, prenom, sexe, date_naissance)
+                                VALUES (:nom, :prenom, :sexe, :date_naissance) 
+                        ");
+                        $requetePersonne->execute([
+                                "nom" => $nomRealisateur,
+                                "prenom" => $prenomRealisateur,
+                                "sexe" => $sexeRealisateur,
+                                "date_naissance"=> $date_naissanceRealisateur
+                        ]);  
+                        //on fait la redirection vers la liste des rôles (header("Location: index.php..."))
+                        
+                        $lastInsertRealisateur=$pdo->lastInsertId();
+                        
+                        $requeteRealisateur=$pdo->prepare("
+                                INSERT INTO realisateur ( id_personne)
+                                VALUES ( :id_personne)
+                                ");
+                        $requeteRealisateur->execute([
+                                "id_personne" => $lastInsertRealisateur
+                        ]);
+                                                                  
+                        
+                        header("Location: index.php?action=listRealisateurs");
+                        die;
+                        
+                }
+        }
+        
+        require "view/addRealisateur.php";
+    }
 }
 
 ?>

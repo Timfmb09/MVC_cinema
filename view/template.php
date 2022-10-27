@@ -19,7 +19,11 @@ Déclaration du doctype, links css, js etc qu'une seule fois.-->
             <li><a href="index.php?action=listRealisateurs">Realisateurs</a></li>
             <li><a href="index.php?action=listGenres">Genres</a></li>
             <li><a href="index.php?action=listRoles">Roles</a></li>
-            <li><a href="index.php?action=add">Add</a></li>
+            <li><a href="index.php?action=addRole">Add Role</a></li>
+            <li><a href="index.php?action=addGenre">Add Genre</a></li>
+            <li><a href="index.php?action=addActeur">Add Acteur</a></li>
+            <li><a href="index.php?action=addRealisateur">Add Realisateur</a></li>
+            <li><a href="index.php?action=addFilm">Add Film</a></li>
                         
         </ul>
     </nav>
