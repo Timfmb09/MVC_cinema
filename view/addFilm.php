@@ -22,16 +22,14 @@
           ?>
         </select>
      
-        <select name="id_genre">
+        <select name="id_genre[]" multiple >
           <option value="default">Par défaut</option>
           <?php
             foreach ($reqGenres->fetchAll() AS $genre){
-            echo "<option value=".$genre ['id_genre'].">".$genre ['genre']."</option>";
+            echo "<option value=".$genre ['id_genre'].">".$genre ['nom_genre']."</option>";
             }
           ?>
-
-
-        </select>    
+          </select>    
       
       <td colspan="2"><input type="submit" name="submit" class="btn" value="Ajouter"></td>
 
@@ -39,7 +37,6 @@
 </body>
 </html>
 <?php
-
 $titre = "Ajout Film";
 $titre_secondaire = "Ajout Film";
 $contenu = ob_get_clean();
