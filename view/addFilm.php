@@ -37,6 +37,8 @@
 </body>
 </html>
 <?php
+
+
 $titre = "Ajout Film";
 $titre_secondaire = "Ajout Film";
 $contenu = ob_get_clean();
