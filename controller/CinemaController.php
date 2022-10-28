@@ -312,8 +312,11 @@ class CinemaController {
                         FROM personne p
                         INNER JOIN realisateur r ON p.id_personne = r.id_personne
                 ");
-                // $reqGenres = 
-                
+              
+                $reqGenres = $pdo->query("
+                        SELECT id_genre
+                        FROM genre                          
+                ");
         //si on détecte le submit ($_POST["submit])     
         //alors on se connecte à  la base de données
         if(isset($_POST["submit"])) {
@@ -324,14 +327,15 @@ class CinemaController {
                 $synopsisFilm = filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $noteFilm = filter_input(INPUT_POST, "note", FILTER_SANITIZE_NUMBER_INT);
                 $afficheFilm = filter_input(INPUT_POST, "affiche", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                $id_realisateurFilm = filter_input(INPUT_POST, "id_realisateur", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $id_realisateurFilm = filter_input(INPUT_POST, "id_realisateur", FILTER_SANITIZE_NUMBER_INT);
+                $id_genreFilm = filter_input(INPUT_POST, "id_genre", FILTER_SANITIZE_NUMBER_INT);
                 //si le filtre est valide, on prépare la requête d'insertion (INSERT INTO ... VALUES)
                 //on exécute la requête en faisant passer le tableau d'arguments
-                if($titreFilm && $annee_sortie_franceFilm && $duree_minutesFilm && $synopsisFilm && $noteFilm && $afficheFilm && $id_realisateurFilm) {
+                if($titreFilm && $annee_sortie_franceFilm && $duree_minutesFilm && $synopsisFilm && $noteFilm && $afficheFilm && $id_realisateurFilm && $id_genreFilm)  {
                         $pdo = Connect :: seConnecter();
                         $requeteFilm = $pdo->prepare("
-                                INSERT INTO film (titre, annee_sortie_france, duree_minutes, synopsis, note, affiche, id_realisateur)
-                                VALUES (:titre, :annee_sortie_france, :duree_minutes, :synopsis, :note, :affiche, :id_realisateur) 
+                                INSERT INTO film (titre, annee_sortie_france, duree_minutes, synopsis, note, affiche, id_realisateur, id_genre)
+                                VALUES (:titre, :annee_sortie_france, :duree_minutes, :synopsis, :note, :affiche, :id_realisateur, :id_genre) 
                         ");
                         $requeteFilm->execute([
                                 "titre" => $titreFilm,
@@ -340,18 +344,20 @@ class CinemaController {
                                 "synopsis"=> $synopsisFilm,
                                 "note"=> $noteFilm,
                                 "affiche"=> $afficheFilm,
-                                "id_realisateur"=>$id_realisateurFilm
+                                "id_realisateur"=>$id_realisateurFilm,
+                                "id_genre"=>$id_genreFilm
                         ]);  
 
                         $lastInsertFilm=$pdo->lastInsertId();
                         
                         $requeteFilm=$pdo->prepare("
-                                INSERT INTO film ( id_film, id_realisateur)
-                                VALUES (:id_film, :id_realisateur)
+                                INSERT INTO film ( id_film, id_realisateur, id_genre)
+                                VALUES (:id_film, :id_realisateur,:id_genre)
                                 ");
                         $requeteFilm->execute([
                                 "id_film" => $lastInsertFilm,
                                 "id_realisateur"=> $lastInsertFilm,
+                                "id_genre"=> $lastInsertFilm
                         ]);
                         
                         //on fait la redirection vers la liste des rôles (header("Location: index.php..."))

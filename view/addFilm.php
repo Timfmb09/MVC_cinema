@@ -22,8 +22,15 @@
           ?>
         </select>
      
-        <select name="nom_genre">
+        <select name="id_genre">
           <option value="default">Par défaut</option>
+          <?php
+            foreach ($reqGenres->fetchAll() AS $genre){
+            echo "<option value=".$genre ['id_genre'].">".$genre ['genre']."</option>";
+            }
+          ?>
+
+
         </select>    
       
       <td colspan="2"><input type="submit" name="submit" class="btn" value="Ajouter"></td>
@@ -34,7 +41,7 @@
 <?php
 
 $titre = "Ajout Film";
-$titre_secondaire = "Ajout";
+$titre_secondaire = "Ajout Film";
 $contenu = ob_get_clean();
 require "view/template.php";
 
