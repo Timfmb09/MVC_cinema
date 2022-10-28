@@ -17,8 +17,10 @@ html, body {
     }
     ul{
     list-style-type: none;
-    flex-direction: row; 
     color:black;        
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     }
     p,td {
     color: black;

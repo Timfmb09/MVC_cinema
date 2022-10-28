@@ -381,19 +381,21 @@ class CinemaController {
                         $pdo = Connect :: seConnecter();
                         $requeteFilm = $pdo->prepare("
                                 INSERT INTO film (titre, annee_sortie_france, duree_minutes, synopsis, note, affiche, id_realisateur)
-                                VALUES (:titre, :annee_sortie_france, :duree_minutes, :synopsis, :note, :affiche, :id_realisateur) 
+                                VALUES ($titreFilm, 2020, $duree_minutesFilm, $synopsisFilm, $noteFilm, $afficheFilm, $id_realisateurFilm) 
                         ");
+                     
                         $requeteFilm->execute([
                                 "titre" => $titreFilm,
-                                "annee_sortie_france" => strtotime($annee_sortie_franceFilm),
+                                "annee_sortie_france" =>$annee_sortie_franceFilm,
                                 "duree_minutes" => $duree_minutesFilm,
                                 "synopsis"=> $synopsisFilm,
                                 "note"=> $noteFilm,
                                 "affiche"=> $afficheFilm,
-                                "id_realisateur"=>$id_realisateurFilm,    
-
+                                "id_realisateur"=>$id_realisateurFilm,  
+                        
                         ]);  
-
+                        var_dump($requeteFilm);
+                        die;
                         $lastInsertFilm=$pdo->lastInsertId();
                         foreach($id_genreFilm as $genre){
                                 $lastInsertFilmGenres = $pdo->prepare("
@@ -407,25 +409,27 @@ class CinemaController {
                                 ]);
                         }
                         $requeteFilm=$pdo->prepare("
-                                INSERT INTO film ( id_film, id_realisateur, id_genre)
-                                VALUES (:id_film, :id_realisateur,:id_genre)
+                                INSERT INTO film ( id_film, id_realisateur)
+                                VALUES (:id_film, :id_realisateur)
                                 ");
 
                         $requeteFilm->execute([
                                 "id_film" => $lastInsertFilm,
                                 "id_realisateur"=> $lastInsertFilm,
-                                "id_genre"=> $lastInsertFilm
+                                
                         ]);
                                                 
                         
                         //on fait la redirection vers la liste des rôles (header("Location: index.php..."))
+                       
                         header("Location: index.php?action=listFilms");
-                                                                        
+
                 }
         }
 
         require "view/addFilm.php";
         }
+        
 
         }
 
