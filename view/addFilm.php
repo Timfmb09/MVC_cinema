@@ -11,7 +11,7 @@
       <input type="number" name="duree_minutes">
       <input type="text" name="synopsis">
       <input type="number" name="note">
-      <input type="text" name="affiche">
+      <input type="url" name="affiche">
       
         <select name="id_realisateur">
           <option value="default">Par défaut</option>
