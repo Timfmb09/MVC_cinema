@@ -5,7 +5,7 @@
     <title>add</title>
   </head>
 <body>
-  <form name="add" action="" method="POST">
+  <form name="add" action="index.php?action=addFilm" method="POST">
       <input type="text" name="nom">
       <input type="text" name="prenom">
       <input type="text" name="sexe">

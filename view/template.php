@@ -12,7 +12,7 @@ Déclaration du doctype, links css, js etc qu'une seule fois.-->
 <body>
 
 
-    <nav class="uk-navbar-container" uk-navbar uk-stripos  >
+    <nav class="uk-navbar-container uk-navbar uk-stripos"  >
         <ul>
             <li><a href="index.php?action=listFilms">Films</a></li>
             <li><a href="index.php?action=listActeurs">Acteurs</a></li>
