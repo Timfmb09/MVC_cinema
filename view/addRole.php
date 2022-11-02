@@ -5,6 +5,7 @@
     <title>add</title>
   </head>
 <body>
+<form name="add" action="" method="POST">
     <input type="text" name="nom_role">
     <textarea name="descrip_role" id="" cols="30" rows="10">
     </textarea>

@@ -5,9 +5,9 @@
     <title>add</title>
   </head>
 <body>
-<form name="add" action="index.php?action=addFilm" method="POST">   
+<form name="add" action="" method="POST">   
       <input type="text" name="titre">
-      <input type="date" name="annee_sortie_france">
+      <input type="number" name="annee_sortie_france" min="10" max="3000">
       <input type="number" name="duree_minutes">
       <input type="text" name="synopsis">
       <input type="number" name="note">

@@ -229,7 +229,7 @@ class CinemaController {
                         ]);  
                         //on fait la redirection vers la liste des rôles (header("Location: index.php..."))
                         header("Location: index.php?action=listRoles");
-                        die;
+                        // die;
                 }
         }
         
@@ -255,7 +255,7 @@ class CinemaController {
                                 ]);  
                                 //on fait la redirection vers la liste des rôles (header("Location: index.php..."))
                                 header("Location: index.php?action=listGenres");
-                                die;
+                                // die;
                         }
                 }
                 
@@ -297,7 +297,7 @@ class CinemaController {
                         ]);
                         //on fait la redirection vers la liste des rôles (header("Location: index.php..."))
                         header("Location: index.php?action=listActeurs");
-                        die;
+                        // die;
                 }
         }
         
@@ -359,7 +359,7 @@ class CinemaController {
                 ");
         
                 $reqGenres = $pdo->query("
-                        SELECT *
+                        SELECT id_genre, nom_genre
                         FROM genre                          
                 ");
         
@@ -368,7 +368,7 @@ class CinemaController {
         if(isset($_POST["submit"])) {
                 //on filtre le champ role du formulaire (filter_input)
                 $titreFilm = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                $annee_sortie_franceFilm = filter_input(INPUT_POST, "annee_sortie_france", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $annee_sortie_franceFilm = filter_input(INPUT_POST, "annee_sortie_france", FILTER_SANITIZE_NUMBER_INT);
                 $duree_minutesFilm = filter_input(INPUT_POST, "duree_minutes", FILTER_SANITIZE_NUMBER_INT);
                 $synopsisFilm = filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $noteFilm = filter_input(INPUT_POST, "note", FILTER_SANITIZE_NUMBER_INT);
@@ -381,7 +381,7 @@ class CinemaController {
                         $pdo = Connect :: seConnecter();
                         $requeteFilm = $pdo->prepare("
                                 INSERT INTO film (titre, annee_sortie_france, duree_minutes, synopsis, note, affiche, id_realisateur)
-                                VALUES ($titreFilm, 2020, $duree_minutesFilm, $synopsisFilm, $noteFilm, $afficheFilm, $id_realisateurFilm) 
+                                VALUES ($titreFilm, $annee_sortie_franceFilm, $duree_minutesFilm, $synopsisFilm, $noteFilm, $afficheFilm, $id_realisateurFilm) 
                         ");
                      
                         $requeteFilm->execute([
@@ -394,8 +394,8 @@ class CinemaController {
                                 "id_realisateur"=>$id_realisateurFilm,  
                         
                         ]);  
-                        var_dump($requeteFilm);
-                        die;
+                        // var_dump($requeteFilm);
+                        // die;
                         $lastInsertFilm=$pdo->lastInsertId();
                         foreach($id_genreFilm as $genre){
                                 $lastInsertFilmGenres = $pdo->prepare("

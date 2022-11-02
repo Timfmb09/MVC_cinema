@@ -10,12 +10,10 @@
       <input type="text" name="prenom">
       <input type="text" name="sexe">
       <input type="date" name="date_naissance">     
-    </tr>
-    <tr align="left">
-      <td colspan="2"><input type="submit" name="submit" class="btn" value="Ajouter"></td>
-    </tr>
-  </table>
-</form>
+        <tr align="left">
+          <td colspan="2"><input type="submit" name="submit" class="btn" value="Ajouter"></td>
+        </tr>
+ </form>
 </body>
 </html>
 <?php
