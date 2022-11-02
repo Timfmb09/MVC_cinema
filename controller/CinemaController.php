@@ -221,11 +221,11 @@ class CinemaController {
                         $pdo = Connect :: seConnecter();
                         $requeteRole = $pdo->prepare("
                                 INSERT INTO role (nom_role, descrip_role)
-                                VALUES (:nom_role, :desc_role) 
+                                VALUES (:nom_role, :descrip_role) 
                         ");
                         $requeteRole->execute([
                                 "nom_role" => $nomRole,
-                                "desc_role" => $descRole
+                                "descrip_role" => $descRole
                         ]);  
                         //on fait la redirection vers la liste des rôles (header("Location: index.php..."))
                         header("Location: index.php?action=listRoles");
